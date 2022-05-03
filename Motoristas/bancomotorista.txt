@@ -1,0 +1,22 @@
+{
+    "1235": {
+        "cpf": 1235,
+        "nome": "nayron",
+        "carteira": "B"
+    },
+    "9595959": {
+        "cpf": 9595959,
+        "nome": "Nayron 2 nesse karai",
+        "carteira": "B"
+    },
+    "1234": {
+        "cpf": 1234,
+        "nome": "nayron",
+        "carteira": "B"
+    },
+    "0": {
+        "cpf": 0,
+        "nome": "Josue karai",
+        "carteira": "AB"
+    }
+}
