@@ -1,7 +1,9 @@
 import Menus
 import motoristaBanco
+import re
 
 banco = motoristaBanco
+CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}')
 
 
 def main():
@@ -12,15 +14,27 @@ def main():
             adicionar()
         case 2:
             resgatar()
+        case 3:
+            editar()
+        case 4:
+            remover()
+        case 5:
+            listarFiltrado()
+        case 6:
+            listarTodos()
 
 
 def adicionar():
     while True:
-        cpf = int(input("Qual o CPF? obs:apenas números "))
-        if banco.checkCPF(cpf):
-            print("O cpf já está cadastrado.")
+        print('Digite o CPF com letras e pontos ex: 999.999.999-99')
+        cpf = input("Qual o CPF?  ")
+        if CPFexpr.match(cpf):
+            if banco.checkCPF(cpf):
+                print("O cpf já está cadastrado.")
+            else:
+                break
         else:
-            break
+            print('O CPF foi digitado incorretamente.')
 
     nome = str(input("Insira o nome do Motorista: "))
 
@@ -47,11 +61,74 @@ def adicionar():
 
 
 def resgatar():
-    cpf = int(input("Qual o cpf? "))
-    resultado = banco.pegar(cpf)
-    print(f'''
-        Nome: {resultado.get('nome')}
-        CPF: { resultado.get('cpf')}
-        Carteira: {resultado.get('carteira')}
-    ''')
+    while True:
+        cpf = input("Qual o cpf? ")
+        if CPFexpr.match(cpf):
+            if banco.checkCPF(cpf):
+                resultado = banco.pegarCPF(cpf)
+                print(f'''
+                    Nome: {resultado.get('nome')}
+                    CPF: {resultado.get('cpf')}
+                    Carteira: {resultado.get('carteira')}
+                ''')
+            else:
+                print("CPF não encontrado, Digite novamente.")
+        else:
+            print("CPF digitado incorretamente. siga o padrão 999.999.999-99")
+
+
+def editar():
+    cpf = input("Qual o CPF do Motorista? ")
+    if CPFexpr.match(cpf):
+        if banco.checkCPF(cpf):
+            nome = str(input("Qual o novo nome? "))
+            print(banco.altera(cpf, nome))
+        else:
+            print("O cpf não está cadastrado.")
+    else:
+        print("CPF digitado incorretamente. siga o padrão 999.999.999-99")
+
+
+def remover():
+    cpf = input("Qual o CPF do Motorista? ")
+    if CPFexpr.match(cpf):
+        if banco.checkCPF(cpf):
+            motorista = banco.pegarCPF(cpf)
+            while True:
+                escolha = int(input(f"Deseja realmente excluir {motorista.get('name')}?\n [1]- Sim \n[2]- Não \n:   "))
+                if escolha == 1:
+                    banco.remover(cpf)
+                    print('Removido com sucesso.')
+                    break
+                elif escolha == 2:
+                    print('Operação cancelada.')
+                    break
+                else:
+                    print('Selecione uma opção válida')
+        else:
+            print("O cpf não está cadastrado.")
+    else:
+        print("CPF digitado incorretamente. siga o padrão 999.999.999-99")
+
+
+def listarFiltrado():
+    carteira = input('Qual carteira deseja filtrar? [A] [B] [AB]  ')
+    motoristas = banco.pegarTodos()
+    for motorista in motoristas:
+        if motorista.get('carteira') == carteira:
+            print(f'''
+            {''*20}Nome: {motorista.get('nome')}
+            {''*20}CPF: {motorista.get('cpf')}
+            {''*20}Carteira: {motorista.get('carteira')}
+            ''')
+
+def listarTodos():
+    motoristas = banco.pegarTodos()
+    for motorista in motoristas:
+            print(f'''
+               {'' * 20}Nome: {motorista.get('nome')}
+               {'' * 20}CPF: {motorista.get('cpf')}
+               {'' * 20}Carteira: {motorista.get('carteira')}
+               ''')
+
 main()
