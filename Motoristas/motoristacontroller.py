@@ -1,7 +1,14 @@
 import menus
 import motoristaBanco as banco
 import re
+<<<<<<< HEAD
 import main
+=======
+
+banco = motoristaBanco
+CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}')#expressão regular- É um padrão para strings
+
+>>>>>>> 4657debb4722b06553627b275c89d839e4f8ed26
 
 def main():
     menus.menu_motorista()
@@ -28,7 +35,7 @@ def adicionar():
     while True:
         print('Digite o CPF com letras e pontos ex: 999.999.999-99')
         cpf = input("Qual o CPF?  ")
-        if CPFexpr.match(cpf):
+        if CPFexpr.match(cpf): #checa se a string está seguindo o padrão do CPF
             if banco.checkCPF(cpf):
                 print("O cpf já está cadastrado.")
             else:
