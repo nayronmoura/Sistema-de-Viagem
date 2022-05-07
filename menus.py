@@ -7,3 +7,10 @@ def menu_motorista():
     print('5 - Listar Todos os Motorista por tipo da carteira')  # perguntar antes qual tipo da carteira ('A' - 'B' - 'AB')
     print('6 - Listar Todos os Motorista')
     print('7 - SAIR')
+
+def main_menu():
+    print('-----------MENU---------')
+    print('1 - Menu de Motorista')
+    print('2 - Menu de Veiculo')
+    print('3 - Menu de Viagem')
+    print('4 - SAIR')
