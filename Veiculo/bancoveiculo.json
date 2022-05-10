@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+{
+    "123": {
+        "placa": "123",
+        "tipo": "moto",
+        "motorista": "ju"
+    },
+    "132": {
+        "placa": "132",
+        "tipo": "carro",
+        "motorista": "nay"
+    }
+=======
 {
 
+>>>>>>> 8a8063cdedaad4309bea0e1ffcacc058cf5bd1cf
 }
