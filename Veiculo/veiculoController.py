@@ -1,11 +1,12 @@
-<<<<<<< HEAD
+import menus
 import veiculoBanco
 
 banco = veiculoBanco
 
 
 def main():
-    chose = int(input(" Escolha uma opção: "))
+    menus.menuVeiculo()
+    chose = int(input("Escolha uma opção: "))
     match chose:
         case 1:
             cadastrar()
@@ -41,6 +42,7 @@ def cadastrar():
         else:
             print('O valor não é válido !!')
     banco.cadastro({'placa': placa, 'tipo': veiculo, 'motorista': ''})
+    main()
 
 
 def motorista():
@@ -50,6 +52,7 @@ def motorista():
             print('O motorista já está cadastrado!!')
         else:
             break
+    main()
 
 
 def buscarPlaca():
@@ -64,6 +67,7 @@ def buscarPlaca():
             ''')
         else:
             break
+    main()
 
 
 def motoristaVeiculo():
@@ -75,6 +79,7 @@ def motoristaVeiculo():
             break
         else:
             print('Digite A placa corretamente !!')
+    main()
 
 
 def removerMotorista():
@@ -85,30 +90,30 @@ def removerMotorista():
             break
         else:
             print('Digite A placa corretamente !!')
+    main()
+
 
 def veiculosEmotoristas():
-
-        veiculos = banco.bancoveiculo()
-        for a in veiculos.values():
-            if a.get('motorista')!= '':
-                print(f'''
-                Placa: {a.get ('placa')}
-                motorista: {a.get ('motorista')}
-                Tipo: {a.get ('tipo')}
-
-
+    veiculos = banco.bancoveiculo()
+    for a in veiculos.values():
+        if a.get('motorista') != '':
+            print(f'''
+                Placa: {a.get('placa')}
+                motorista: {a.get('motorista')}
+                Tipo: {a.get('tipo')}
             ''')
+    main()
+
 
 def motoristasSveiculos():
     veiculos = banco.bancoveiculo()
     for a in veiculos.values():
         if a.get('motorista') != '':
             print(f'''
-                    
-                    motorista: {a.get('motorista')}
-
+                    placa:{a.get('placa')}
+                    tipo:{a.get('tipo')}
                 ''')
-
+    main()
 
 
 def removerVeiculo():
@@ -119,67 +124,7 @@ def removerVeiculo():
             break
         else:
             print('Digite A placa corretamente !!')
-
-main()
-=======
-import Menus
-import veiculoBanco
-banco = veiculoBanco
-
-def main():
-    Menus.menu_veiculo()
-    chose = int(input(" Escolha uma opção: "))
-    match chose:
-        case 1:
-            cadastrar()
-        case 2:
-            buscarPlaca()
-        case 3:
-            motoristaVeiculo()
-
-
-
-
-def cadastrar():
-    while True:
-        placa = str(input('Digite a placa que quer cadastrar: '))
-        if banco.checkPlaca(placa):
-            print('A placa já está cadastrada!! ')
-        else:
-            break
-    while True:
-        tipo = str(input('é: [1] Carro    [2] Moto'))
-        if tipo == 2:
-            veiculo = 'moto'
-        elif tipo == 1:
-            veiculo = 'carro'
-        else:
-            break
-
-
-def motorista():
-    while True:
-        motorista = str(input('Digite o nome do Motorista; '))
-        if banco.checkMotorista(motorista):
-            print('O motorista já está cadastrado!!')
-        else:
-            break
-
-def buscarPlaca():
-    while True:
-        placa = str(input('Digite a placa que deseja encontrar: '))
-        if banco.checkPlaca(placa):
-            print('Informações da placa cadastrada:', motorista, veiculo)
-        else:
-            break
-
-def motoristaVeiculo():
-    while True:
-        placa = str(input('digite a placa: '))
-        motorista = str(input('Digite o motorista que quer adicionar a placa: '))
-
-
+    main()
 
 
 main()
->>>>>>> 8a8063cdedaad4309bea0e1ffcacc058cf5bd1cf

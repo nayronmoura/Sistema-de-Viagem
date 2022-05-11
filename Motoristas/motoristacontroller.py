@@ -1,21 +1,17 @@
 import menus
 import motoristaBanco as banco
 import re
-<<<<<<< HEAD
 import main
-=======
 
-banco = motoristaBanco
 CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}')#expressão regular- É um padrão para strings
 
->>>>>>> 4657debb4722b06553627b275c89d839e4f8ed26
 
 def main():
     menus.menu_motorista()
     chose = int(input("Selecione uma opção: "))
     match chose:
         case 1:
-            global CPFexpr;
+            global CPFexpr
             CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}') # expressão regular - É um padrão para strings
             adicionar()
         case 2:
@@ -28,8 +24,6 @@ def main():
             listarFiltrado()
         case 6:
             listarTodos()
-        case 7:
-            Main.init()
 
 def adicionar():
     while True:
@@ -77,6 +71,7 @@ def resgatar():
                     CPF: {resultado.get('cpf')}
                     Carteira: {resultado.get('carteira')}
                 ''')
+                break
             else:
                 print("CPF não encontrado, Digite novamente.")
         else:
@@ -84,15 +79,17 @@ def resgatar():
     main()
 
 def editar():
-    cpf = input("Qual o CPF do Motorista? ")
-    if CPFexpr.match(cpf):
-        if banco.checkCPF(cpf):
-            nome = str(input("Qual o novo nome? "))
-            print(banco.altera(cpf, nome))
+    while True:
+        cpf = input("Qual o CPF do Motorista? ")
+        if CPFexpr.match(cpf):
+            if banco.checkCPF(cpf):
+                nome = str(input("Qual o novo nome? "))
+                print(banco.altera(cpf, nome))
+                break
+            else:
+                print("O cpf não está cadastrado.")
         else:
-            print("O cpf não está cadastrado.")
-    else:
-        print("CPF digitado incorretamente. siga o padrão 999.999.999-99")
+            print("CPF digitado incorretamente. siga o padrão 999.999.999-99")
     main()
 
 def remover():
@@ -125,8 +122,7 @@ def listarFiltrado():
             print(f'''
             {''*20}Nome: {motorista.get('nome')}
             {''*20}CPF: {motorista.get('cpf')}
-            {''*20}Carteira: {motorista.get('carteira')}
-            ''')
+            {''*20}Carteira: {motorista.get('carteira')}''')
     main()
 
 def listarTodos():

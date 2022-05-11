@@ -10,7 +10,6 @@ def atualizaBanco():
 def pegarCPF(cpf):
     with open("bancomotorista.json", 'r') as fp:
         dados = json.load(fp)
-    print(dados)
     return dados.get(cpf)
 
 
@@ -31,19 +30,16 @@ def adicionar(motorista):
 
 
 def altera(cpf, nome):
-    if not checkCPF(cpf):
-        try:
-            banco = atualizaBanco()
-            motorista = banco.get(str(cpf))
-            motorista['nome'] = nome
-            banco[cpf] = motorista
-            with open("bancomotorista.json", 'w') as fp:
-                json.dump(dict(banco), fp, indent=4)
-            return f"O Motorista do CPF {cpf} foi alterado com sucesso"
-        except:
-            print("Ocorreu um erro ao tentar alterar, tente novamente.")
-    else:
-        return "O CPF não consta na nossa Base de dados."
+    try:
+        banco = atualizaBanco()
+        motorista = banco.get(str(cpf))
+        motorista['nome'] = nome
+        banco[cpf] = motorista
+        with open("bancomotorista.json", 'w') as fp:
+            json.dump(dict(banco), fp, indent=4)
+        return f"O Motorista do CPF {cpf} foi alterado com sucesso"
+    except:
+        print("Ocorreu um erro ao tentar alterar, tente novamente.")
 
 
 def remover(cpf):
