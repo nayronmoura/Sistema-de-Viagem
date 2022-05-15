@@ -1,5 +1,6 @@
 import menus
-import veiculoBanco
+from Veiculo import veiculoBanco
+
 
 banco = veiculoBanco
 
@@ -127,4 +128,4 @@ def removerVeiculo():
     main()
 
 
-main()
+

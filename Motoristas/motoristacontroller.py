@@ -1,7 +1,8 @@
 import menus
-import motoristaBanco as banco
+from Motoristas import motoristaBanco as banco
 import re
-import main
+
+
 
 CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}')#expressão regular- É um padrão para strings
 
@@ -135,4 +136,4 @@ def listarTodos():
                ''')
     main()
 
-main()
+

@@ -123,4 +123,4 @@ def toData(string):
     return datetime.strptime(string, '%Y-%m-%d').date()
 
 
-main()
+
