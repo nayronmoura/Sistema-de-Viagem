@@ -2,13 +2,13 @@ import json
 
 
 def atualizaBanco():
-    with open("bancomotorista.json", 'r') as fp:
+    with open("./Motoristas/bancomotorista.json", 'r') as fp:
         dados = json.load(fp)
     return dados
 
 
 def pegarCPF(cpf):
-    with open("bancomotorista.json", 'r') as fp:
+    with open("./Motoristas/bancomotorista.json", 'r') as fp:
         dados = json.load(fp)
     return dados.get(cpf)
 
@@ -23,7 +23,7 @@ def adicionar(motorista):
     try:
         banco = atualizaBanco()
         banco[motorista.get('cpf')] = motorista
-        with open("bancomotorista.json", 'w') as fp:
+        with open("./Motoristas/bancomotorista.json", 'w') as fp:
             json.dump(dict(banco), fp, indent=4)
     except:
         print("Houve um erro no cadastro, tente novamente.")
@@ -35,7 +35,7 @@ def altera(cpf, nome):
         motorista = banco.get(str(cpf))
         motorista['nome'] = nome
         banco[cpf] = motorista
-        with open("bancomotorista.json", 'w') as fp:
+        with open("./Motoristas/bancomotorista.json", 'w') as fp:
             json.dump(dict(banco), fp, indent=4)
         return f"O Motorista do CPF {cpf} foi alterado com sucesso"
     except:
@@ -46,7 +46,7 @@ def remover(cpf):
     try:
         banco = atualizaBanco()
         banco.pop(cpf)
-        with open("bancomotorista.json", 'w') as fp:
+        with open("./Motoristas/bancomotorista.json", 'w') as fp:
             json.dump(dict(banco), fp, indent=4)
     except:
         print("Ocorreu um erro, tente novamente.")

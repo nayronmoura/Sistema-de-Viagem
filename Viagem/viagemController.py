@@ -5,10 +5,11 @@ from datetime import date, datetime
 import Veiculo.veiculoBanco as veiculoBanco
 from Viagem import viagemBanco as banco
 
-CPFexpr = re.compile(r'\d{3}\.\d{3}\.\d{3}-\d{2}')  # expressão regular- É um padrão para strings
+regex = re.compile(r"[A-Z]{3}[0-9][0-9A-Z][0-9]{2}")  # expressão regular- É um padrão para strings
 
 
 def main():
+    print(" \n ")
     menus.menuViagem()
     chose = int(input("Escolha uma opção: "))
     match chose:
@@ -29,36 +30,47 @@ def main():
 
 
 def criarviagem():
+    print("-" * 30)
     while True:
         placa = str(input("insira a placa do veículo: "))
-        if veiculoBanco.checkPlaca(placa):
-            if not banco.vefificaViagem(placa):
-                print(f'veículo {placa} selecionado.')
-                rota = str(input("Qual a rota? ex: de Serra talhada para triúnfo   \n: "))
-                banco.cadastrar({'placa': placa, 'rota': rota, 'data': f'{date.today()} -', 'status': True})
-                break
+        if regex.match(placa):
+            if veiculoBanco.checkPlaca(placa):
+                if not banco.vefificaViagem(placa):
+                    print(f'veículo {placa} selecionado.')
+                    rota = str(input("Qual a rota? ex: de Serra talhada para triúnfo   \n: "))
+                    banco.cadastrar({'placa': placa, 'rota': rota, 'data': f'{date.today()} -', 'status': True})
+                    print("-" * 30)
+                    break
+                else:
+                    print('o Veículo atual já está em viagem')
             else:
-                print('o Veículo atual já está em viagem')
+                print('O veículo não está cadastrado.')
         else:
-            print('O veículo não está cadastrado.')
+            print("placa digitada incorretamente.")
 
 
 def finalizarViagem():
+    print("-" * 30)
     while True:
         placa = str(input('Qual a placa do carro? '))
-        if veiculoBanco.checkPlaca(placa):
-            if banco.pegarViagem(placa):
-                viagem = banco.pegarViagem(placa)
-                banco.cadastrar({'placa': placa, 'rota': viagem.get('rota'),
-                                 'data': (viagem.get('data') + f' {date.today()}'), 'status': False})
-                print('viagem encerrada com sucesso.')
+        if regex.match(placa):
+            if veiculoBanco.checkPlaca(placa):
+                if banco.pegarViagem(placa):
+                    viagem = banco.pegarViagem(placa)
+                    banco.cadastrar({'placa': placa, 'rota': viagem.get('rota'),
+                                     'data': (viagem.get('data') + f' {date.today()}'), 'status': False})
+                    print('viagem encerrada com sucesso.')
+                    print("-" * 30)
+                else:
+                    print('O veículo não está em viagem')
             else:
-                print('O veículo não está em viagem')
+                print('o veículo não está cadastrado')
         else:
-            print('o veículo não está cadastrado')
+            print("placa digitada incorretamente.")
 
 
 def viagensAtivas():
+    print("-" * 30)
     viagens = banco.atualizaBanco()
     counter = 0
     for viagem in viagens.values():
@@ -68,34 +80,42 @@ def viagensAtivas():
                   f'data: {viagem.get("data")}\n')
         if not counter > 1:
             print('não há viagens ativas.')
+    print("-" * 30)
 
 
 def veiculosEmViagem():
+    print("-" * 30)
     veiculos = veiculoBanco.bancoveiculo()
     for veiculo in veiculos.values():
         if banco.vefificaViagem(veiculo.get('placa')):
             print(f'placa: {veiculo.get("placa")}\n tipo: {veiculo.get("tipo")}\n '
                   f'motorista:{veiculo.get("motorita")}')
+    print("-" * 30)
 
 
 def listarVeículos():
+    print("-" * 30)
     veiculos = veiculoBanco.bancoveiculo()
     for veiculo in veiculos.values():
         if not banco.vefificaViagem(veiculo.get('placa')):
             print(f' placa: {veiculo.get("placa")}\n tipo: {veiculo.get("tipo")}\n '
                   f'motorista:{veiculo.get("motorita")}\n')
+    print("-" * 30)
 
 
 def listarViagens():
+    print("-" * 30)
     viagens = banco.atualizaBanco()
     for viagem in viagens.values():
         print(f'placa: {viagem.get("placa")}\n rota: {viagem.get("rota")}\n '
               f'data: {viagem.get("data")} \n status: {viagem.get("status")}')
+    print("-" * 30)
 
 
 def listartPeriodo():
+    print("-" * 30)
     viagens = banco.atualizaBanco()
-    exp = re.compile('\d{4}\-\d{2}\-\d{2}')
+    exp = re.compile('\d{4}/\d{2}\/\d{2}')
     while True:
         print(f'formato da data: dia/mes/ano')
         print('data inicial')
@@ -113,14 +133,13 @@ def listartPeriodo():
                         if viagemInicial >= inicio and viagemFinal <= final:
                             print(f'placa: {viagem.get("placa")}\n rota: {viagem.get("rota")}\n '
                                   f'data: {viagem.get("data")} \n status: {viagem.get("status")}')
+                print("-" * 30)
                 break
             else:
                 print('data incorreta')
         else:
             print('data incorreta')
 
+
 def toData(string):
     return datetime.strptime(string, '%Y-%m-%d').date()
-
-
-

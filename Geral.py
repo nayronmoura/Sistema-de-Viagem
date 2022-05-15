@@ -1,17 +1,20 @@
 import menus
-from Veiculo import veiculoController
-from Motoristas import motoristacontroller
-from Viagem import viagemController
+import Veiculo.veiculoController as veiculo
+import Motoristas.motoristacontroller as motorista
+import Viagem.viagemController as viagem
 
-def main():
-    menus.main_menu()
-    chose = int(input("Escolha uma opção: "))
-    match chose:
-        case 1:
-            motoristacontroller.main()
-        case 2:
-            veiculoController.main()
-        case 3:
-            viagemController.main()
 
-main()
+def start():
+    while True:
+        menus.main_menu()
+        chose = int(input("Escolha uma opção: "))
+        match chose:
+            case 1:
+                motorista.main()
+            case 2:
+                veiculo.main()
+            case 3:
+                viagem.main()
+
+
+start()

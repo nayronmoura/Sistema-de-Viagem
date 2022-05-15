@@ -2,7 +2,7 @@ import json
 
 
 def bancoveiculo():
-    with open('../Veiculo/bancoveiculo.json', 'r') as fp:
+    with open('./Veiculo/bancoveiculo.json', 'r') as fp:
         dados = json.load(fp)
         return dados
 
@@ -16,7 +16,7 @@ def checkPlaca(placa):
 def cadastro(veiculo):
     banco = bancoveiculo()
     banco[veiculo.get('placa')] = veiculo
-    with open('../Veiculo/bancoveiculo.json', 'w') as fp:
+    with open('./Veiculo/bancoveiculo.json', 'w') as fp:
         json.dump(dict(banco), fp, indent=4)
 
 
@@ -30,7 +30,7 @@ def motoristaVeiculo(placa, motorista):
     veiculo = banco.get(placa)
     veiculo['motorista'] = motorista
     banco[placa] = veiculo
-    with open('../Veiculo/bancoveiculo.json', 'w') as fp:
+    with open('./Veiculo/bancoveiculo.json', 'w') as fp:
         json.dump(dict(banco), fp, indent=4)
 
 
@@ -39,12 +39,12 @@ def removerMotorista(placa):
     veiculo = banco.get(placa)
     veiculo['motorista'] = ''
     banco[placa] = veiculo
-    with open('../Veiculo/bancoveiculo.json', 'w') as fp:
+    with open('./Veiculo/bancoveiculo.json', 'w') as fp:
         json.dump(dict(banco), fp, indent=4)
 
 
 def removerVeiculo(placa):
     banco = bancoveiculo()
     banco.pop(placa)
-    with open('../Veiculo/bancoveiculo.json', 'w') as fp:
+    with open('./Veiculo/bancoveiculo.json', 'w') as fp:
         json.dump(dict(banco), fp, indent=4)
