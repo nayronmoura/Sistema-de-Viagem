@@ -47,6 +47,7 @@ def criarviagem():
                 print('O veículo não está cadastrado.')
         else:
             print("placa digitada incorretamente.")
+    main()
 
 
 def finalizarViagem():
@@ -67,6 +68,7 @@ def finalizarViagem():
                 print('o veículo não está cadastrado')
         else:
             print("placa digitada incorretamente.")
+    main()
 
 
 def viagensAtivas():
@@ -81,6 +83,7 @@ def viagensAtivas():
         if not counter > 1:
             print('não há viagens ativas.')
     print("-" * 30)
+    main()
 
 
 def veiculosEmViagem():
@@ -91,6 +94,7 @@ def veiculosEmViagem():
             print(f'placa: {veiculo.get("placa")}\n tipo: {veiculo.get("tipo")}\n '
                   f'motorista:{veiculo.get("motorita")}')
     print("-" * 30)
+    main()
 
 
 def listarVeículos():
@@ -101,6 +105,7 @@ def listarVeículos():
             print(f' placa: {veiculo.get("placa")}\n tipo: {veiculo.get("tipo")}\n '
                   f'motorista:{veiculo.get("motorita")}\n')
     print("-" * 30)
+    main()
 
 
 def listarViagens():
@@ -110,6 +115,7 @@ def listarViagens():
         print(f'placa: {viagem.get("placa")}\n rota: {viagem.get("rota")}\n '
               f'data: {viagem.get("data")} \n status: {viagem.get("status")}')
     print("-" * 30)
+    main()
 
 
 def listartPeriodo():
@@ -139,6 +145,7 @@ def listartPeriodo():
                 print('data incorreta')
         else:
             print('data incorreta')
+    main()
 
 
 def toData(string):

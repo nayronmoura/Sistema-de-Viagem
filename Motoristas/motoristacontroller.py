@@ -43,12 +43,12 @@ def adicionar():
         print('''Qual a Carteira do Motorista? A, B ou AB
         ''')
         carteira = str(input("Digite a carteira: "))
-        if carteira in "AB":
+        if carteira.upper() in "AB":
             break
         else:
             print("A carteira selecionada não é válida tente novamente.")
 
-    banco.adicionar({'cpf': cpf, 'nome': nome, 'carteira': carteira})
+    banco.adicionar({'cpf': cpf, 'nome': nome, 'carteira': carteira.upper()})
 
     while True:
         escolha = str(input("Deseja adicionar mais um Motorista? [S] [N]"))

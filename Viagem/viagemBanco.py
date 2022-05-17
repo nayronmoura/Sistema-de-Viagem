@@ -3,7 +3,7 @@ import json
 
 def atualizaBanco():
     dados = {}
-    with open('../Viagem/bancoViagem.json', 'r') as fp:
+    with open('./Viagem/bancoViagem.json', 'r') as fp:
         dados = json.load(fp)
     return dados
 
@@ -28,5 +28,5 @@ def vefificaViagem(placa):
 def cadastrar(viagem):
     banco = atualizaBanco()
     banco[viagem.get('placa')] = viagem
-    with open('../Viagem/bancoViagem.json', 'w') as fp:
+    with open('./Viagem/bancoViagem.json', 'w') as fp:
         json.dump(dict(banco), fp, indent=4)

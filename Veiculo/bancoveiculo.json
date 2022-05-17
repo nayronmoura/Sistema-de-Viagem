@@ -2,6 +2,16 @@
     "AAA0A00": {
         "placa": "AAA0A00",
         "tipo": "moto",
+        "motorista": "999.999.999-99"
+    },
+    "AAA0A01": {
+        "placa": "AAA0A01",
+        "tipo": "carro",
+        "motorista": "555.555.555-55"
+    },
+    "AAA0A10": {
+        "placa": "ABA0A10",
+        "tipo": "carro",
         "motorista": ""
     }
 }
